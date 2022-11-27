@@ -1,0 +1,17 @@
+<h1>Welcome, <%= @user.fname %>!</h1>
+<% if flash[:notice] %>
+  <div class="notice" style="color: red;"> <%= flash[:notice] %> </div>
+<% end %>
+<h2>Accounts:</h2>
+  <% @accounts.each do |a| %>
+    <li>
+      <h3><%= link_to a.account_name, account_path(@user, a) %></h3>
+      <h4>Current Balance:
+        <% if @transactions.blank? || @transactions.where(:account_id => a.id).blank? %>
+          $0.00
+        <% else %>
+          <%= Money.new(@transactions.where(:account_id => a.id).last.current_amount_cents).format %>
+        <% end %>
+      </h4>
+    </li>
+  <% end %>

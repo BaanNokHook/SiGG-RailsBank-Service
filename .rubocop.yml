@@ -1,0 +1,33 @@
+AllCops:
+  EnabledByDefault: true
+  Exclude:
+    - db/schema.rb
+    - vendor/bundle/**/*
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/LineLength:
+  Max: 100
+  Exclude:
+    - Gemfile
+    - config/routes.rb
+
+Rails/FilePath:
+  Exclude:
+    - lib/tasks/cucumber.rake
+
+Style/Copyright:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+
+Style/MissingElse:
+  Enabled: false

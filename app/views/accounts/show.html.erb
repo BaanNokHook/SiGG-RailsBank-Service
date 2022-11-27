@@ -1,0 +1,31 @@
+<p><a href="/users/<%= @user.id %>" style="text-decoration: none;"> < Back to My Accounts </a></p>
+<h1> <%= @user.fname %>'s <%= @account.account_name %> Account </h1>
+<% if flash[:notice] %>
+  <div class="notice" style="color: red;"> <%= flash[:notice] %> </div>
+<% end %>
+<h2> Current Balance:
+  <% if @transactions.blank? %>
+    $0.00
+  <% else %>
+    <%= Money.new(@transactions.last.current_amount_cents).format %>
+  <% end %>
+</h2>
+<h3> <%= link_to "Add Transaction", new_transaction_path(@user, @account) %> </h3>
+<% if @transactions.blank? %>
+  <h4>You have no transactions under this account.</h4>
+<% else %>
+  <table border=1; cellpadding="10px"> <h3> Transactions </h3>
+    <tr>
+      <th> Type </th>
+      <th> Amount </th>
+      <th> Date </th>
+    </tr>
+    <% @transactions.each do |t| %>
+      <tr>
+        <td> <%= t.transaction_name.capitalize %> </td>
+        <td> <%= Money.new(t.amount_cents).format %> </td>
+        <td> <%= t.created_at %> </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
